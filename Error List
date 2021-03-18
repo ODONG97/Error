@@ -1,0 +1,7 @@
+# 오라클 설치 시 발생하는 에러 
+
+[INS-32055] 
+The Central Inventory is located in the Oracle base Are you sure you want to continue?
+-> Oracle base에 Inventory가 설정되어 있어 발생하는 메세지
+권고 사항 : Starting from 11gR2 the product team is recommending to define Oracle_Base and the central oraInventory directory
+            outside of the users home directory.            -> Yes 체크
