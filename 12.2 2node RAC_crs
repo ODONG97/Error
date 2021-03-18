@@ -1,0 +1,12 @@
+[Error]
+12.2 2node RAC서버에서 DATA DG에 asm disk 추가 하고 rebalance가 완료되는 순간 
+ocr/vote를 포함한 모든 asm file에서 i/o 에러를 발생하면서 양 노드 db / asm / crs가 모두 crash 되었고,
+os에선 디스크가 보이는데 io가 되지 않아 양 노드 모두 os 재기동 후에도 ocr/vote disk를 읽지 못해 crs가 기동되지 않는 장애 였습니다
+
+장애 원인은 HCI 환경에서 asm disk 추가시 storage pool 공간 부족으로 thin provisioning을 해서, 문제가 있었던 것으로 판단됩니다
+kfed read로 asm disk header 확인시 모두 정상임을 확인했는데 읽지를 못하는 상태 었습니다
+
+[Solution]
+1. multipath 환경인데 oracleasm_scanorder가 설정되어 있지 않아 추가
+2. sastorage pool 증설
+3. 이후 crs 정상 기동 되었고, rman validate로 datafile 정상 확인 및 서비스 인입 정상 확인 후에 철수 합니다.
