@@ -5,3 +5,21 @@ The Central Inventory is located in the Oracle base Are you sure you want to con
 -> Oracle base에 Inventory가 설정되어 있어 발생하는 메세지
 권고 사항 : Starting from 11gR2 the product team is recommending to define Oracle_Base and the central oraInventory directory
             outside of the users home directory.            -> Yes 체크
+
+
+*Error*
+       -> Error in invoking target 'agent nmhs' of makefile 
+          '/oracle/product/11.2.0.4/sysman/lib/lns_emagent.mk'. See
+          '/oracle/oraInventory/logs/InstallActionsYYYY-MM-DD_HH-MM-SSPM.log'
+          for detals.
+          
+       설치 시 해당 에러 발생 시 아래와 같이 진행 ( Doc ID 2299494.1 )
+       
+       cd $ORACLE_HOME/sysman/lib
+       vi ins_emagent.mk
+       
+       #=======
+       # emdctl
+       #=======
+       $(SYSMANBIN) emdctl :
+          $(MK_EMAGENT_NMECTL)      // 이 라인에 -lnnz11 입력
