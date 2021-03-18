@@ -1,0 +1,4 @@
+Is It Supported to Change Uid/Gid of Oracle Database Software Owner After Installation ? (Doc ID 1474891.1)
+It is not supported to change the UID/GID of Oracle Database Software owner after installation.
+
+Exadata 환경에서 도메인 이름을 변경하는 방법 (Doc ID 2124794.1)
