@@ -1,0 +1,6 @@
+[Error]
+- bash : /etc/profile: line 11: syntax error near unexpected token 'then'
+- bash : /etc/profile : line 11: 'if[$USER = "oracle"]; then'
+
+[Solution]
+if 다음 [ ] 를 사용할 때 한 칸씩 띄어쓰기 해준다.
