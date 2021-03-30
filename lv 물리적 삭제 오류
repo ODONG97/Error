@@ -1,0 +1,35 @@
+Logical Volume 할당 후 물리적 삭제 했을 때 Logical Volume 삭제 안 되는 오류
+
+# lvremove -f /dev/DATA/DATA01
+WARNING: Device for PV ore6TE-2ues-rc5q-mkCN-hEHE-C4Av-paaxEH not found or rejected by a filter.
+  Aborting vg_write: No metadata areas to write to!
+  
+# lvs
+
+# dd if=/dev/zero of=/tmp/tmp.raw bs=1M count=100
+
+# losetup -f
+
+# losetup /dev/loop0 /tmp/tmp.raw
+
+# vgextend DATA /dev/loop0
+WARNING: Device for PV ore6TE-2ues-rc5q-mkCN-hEHE-C4Av-paaxEH not found or rejected by a filter.
+  WARNING: Device for PV ore6TE-2ues-rc5q-mkCN-hEHE-C4Av-paaxEH not found or rejected by a filter.
+  Physical volume "/dev/loop0" successfully created.
+  WARNING: Device for PV ore6TE-2ues-rc5q-mkCN-hEHE-C4Av-paaxEH not found or rejected by a filter.
+  Volume group "vg02" successfully extended
+
+
+# vgremove DATA --force
+ WARNING: Device for PV ore6TE-2ues-rc5q-mkCN-hEHE-C4Av-paaxEH not found or rejected by a filter.
+  Logical volume "u01" successfully removed
+  Volume group "vg02" successfully removed
+
+
+# pvremove /dev/loop0
+WARNING: Device for PV ore6TE-2ues-rc5q-mkCN-hEHE-C4Av-paaxEH not found or rejected by a filter.
+  Labels on physical volume "/dev/loop0" successfully wiped.
+
+# losetup -d /dev/loop0
+
+# rm /tmp/tmp.raw
