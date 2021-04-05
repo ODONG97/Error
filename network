@@ -1,0 +1,25 @@
+rac node 1번
+
+ens 161 - 10.10.10.12
+ens 192 - 172.40.40.165
+ens 224 - 30.30.30.10
+
+네트워크 세 개는 모두 정상적으로 연결 되어 있음
+Xshell에 ssh로 연결이 안 됨 -> ens 161 네트워크 종료하면 정상적으로 연결 잘 됨
+ㄴ 왜? 네트워크 카드 번호가 제일 앞인 161이 먼저 접근해서?
+  ㄴ 161과 191 할당 ip를 변경 해봤지만 해결 X
+ssh active ( running ) -> ssh 할당은 잘 했음
+
+ps -ef | grep sshd
+root 2177   1  0 09:44   ?    00: 00: 00 /usr/sbin/sshd -D
+root 6874 3846 0 10:35 pts.0  00: 00: 00 grep --color=auto sshd
+sshd 가 두 개만 나오는 걸 보면 연결이 제대로 안 되어 있는 것 같음
+
+netstat -an | grep LISTEN 으로 확인 했을 때 22번 포트는 정상적으로 열려있음
+
+SSH 데몬 재실행 : service sshd restart -> 효과 x
+
+/etc/ssh/sshd_config
+Port : 번호 확인
+PermitRootLogin : yes 루트 계정 접근 여부 설정 확인
+PasswordAuthentication Yes : 원격 접속시 키보드로  패스워드를 적지 못하게 하는 설정? -> 이것도 권장 값인 yes로 해결
